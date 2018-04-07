@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <link rel="manifest" href="/manifest.json">
+  <link rel="apple-touch-icon" href="images/General.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="images/General.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/General.png">
+  <link rel="apple-touch-icon" sizes="167x167" href="images/General.png">
+  <link rel="apple-touch-startup-image" href="images/General.png">
+  <meta name="apple-mobile-web-app-title" content="Amala Bhavan">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="blue">
+
+  <meta charset="UTF-8">
+  <title>Amala Bhavan</title>
+  <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/4.6.0/firebase-firestore.js"></script>
+  <!--Import Google Icon Font-->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+  <link rel='stylesheet prefetch' href='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/css/materialize.min.css'>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <script src='https://code.jquery.com/jquery-2.2.4.min.js'></script>
+  <script type="text/javascript" src='https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.7/js/materialize.min.js'></script>
+  <style>
+    .sidebar-item {
+      cursor: pointer;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container" ng-app="app">
+    <ul id="slide-out" class="side-nav" ng-controller="sidebarCtrl">
+      <li>
+        <div class="user-view">
+          <div class="background">
+            <img src="images/logo.jpg">
+          </div>
+          <a>
+            <span class="title">{{name}}</span>
+          </a>
+        </div>
+      </li>
+      <li ng-repeat="item in sidebarItems" class="sidebar-item">
+        <a ng-click="item.fn()">
+          <i class="material-icons">{{item.icon}}</i>{{item.name}}</a>
+      </li>
+      <li class="sidebar-item">
+        <a href="http://www.amalaims.org" target="_blank">
+          <i class="material-icons">language</i>AIMS Website</a>
+      </li>
+    </ul>
+    <a href="#" data-activates="slide-out" class="button-collapse">
+      <i class="material-icons">menu</i>
+    </a>
+    <nav>
+      <div class="nav-wrapper blue lighten-1">
+        <form>
+          <div class="input-field">
+            <input type="search" class="autocomplete" required>
+            <label class="label-icon" for="autocomplete-input">
+              <i class="material-icons  ">search</i>
+            </label>
+          </div>
+        </form>
+      </div>
+    </nav>
+    <br>
+    <br>
+    <br>
+    <div id="main">
+      <div id="today" style="display: none;">
+        <ul class="collection">
+          <li class="collection-item avatar">
+            Today's Events
+            <ul class="collection" id="todo">
+            </ul>
+          </li>
+        </ul>
+      </div>
+
+      <ul class="collection">
+        <li class="collection-item avatar">
+          <i class="material-icons circle">warning</i>
+          <span class="title">Emergency Numbers</span>
+          <p>6666
+          </p>
+          <p onclick="visibleEmergency('emergency')" class="secondary-content">
+            <i class="material-icons">chevron_right</i>
+          </p>
+        </li>
+      </ul>
+    </div>
+    <div id="emergency" style="display: none;">
+      <ul class="collection" id="emer">
+      </ul>
+    </div>
+    <div id="notification" style="display: none;">
+      <ul class="collection" id="noti">
+      </ul>
+    </div>
+    <div id="feedback" style="display: none;">
+      <div>
+        <h4>Feedback Form</h4>
+          <div class="row" ng-controller="feedbackCtrl">
+            <form class="col s12" ng-submit="submitFeedback()">
+              <div class="row">
+                <div class="input-field col s12">
+                  <i class="material-icons prefix">account_circle</i>
+                  <input id="name" ng-model="name" type="text" class="validate">
+                  <label for="name">Name</label>
+                </div>
+              </div>
+              <div class="row">
+                <div class="input-field col s12">
+                  <i class="material-icons prefix">edit</i>
+                  <textarea id="Des" ng-model="description" class="materialize-textarea"></textarea>
+                  <label for="Des">Description</label>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="submit" class="waves-effect waves-light btn right ">Submit</button>
+              </div>
+            </form>
+          </div>
+      </div>
+    </div>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+  <script src="js/index.js"></script>
+  <script src="https://cdn.onesignal.com/sdks/OneSignalSDK.js" async></script>
+  <script>
+    var OneSignal = window.OneSignal || [];
+    OneSignal.push(["init", {
+      appId: "ccdd4863-e26e-4677-acc6-5a8117709a8f",
+      autoRegister: true,
+      notifyButton: {
+        enable: false /* Set to false to hide */
+      }
+    }]);
+  </script>
+
+</body>
+
+</html>
